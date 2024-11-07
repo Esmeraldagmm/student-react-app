@@ -6,6 +6,7 @@ import "./index.css";
 import { Link } from "react-router-dom";
 import { SubmitStudentPage } from "./pages/SubmitStudentPage";
 
+
 //list we can iterate through to display using map
 
 function App() {

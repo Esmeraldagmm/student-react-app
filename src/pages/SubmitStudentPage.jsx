@@ -1,53 +1,51 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export const SubmitStudentPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [major, setMajor] = useState("");
-  const [school, setSchool] = useState("");
+  const { 
+    register, 
+    handleSubmit, 
+    formState:{errors}.
+  } = useForm();
 
-  // 1. add onChange handlers to each input to update the state
-  // 2. add onSubmit handler to the form to submit the data
-
+  const onSubmit = async (data) => {
+    await fetch("http://localhost:3000/students", {
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        major: major,
+        school: school,
+      }),
+      headers: {
+        "content-type": "application/json",
+      },
+      method: "POST",
+    });
+  }
+  
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
         placeholder="First Name"
-        onChange={(event) => setFirstName(event.target.value)}
+        {...register("firstName")}
       />
       <input
         type="text"
         placeholder="Last Name"
-        onChange={(event) => setLastName(event.target.value)}
+        {...register("lastName")}
       />
       <input
         type="text"
         placeholder="Major"
-        onChange={(event) => setMajor(event.target.value)}
+        {...register("major")}
       />
       <input
         type="text"
         placeholder="School"
-        onChange={(event) => setSchool(event.target.value)}
+        {...register("school")}
       />
-      <button
-        onClick={async () => {
-          await fetch("http://localhost:3000/students", {
-            body: JSON.stringify({
-              firstName: firstName,
-              lastName: lastName,
-              major: major,
-              school: school,
-            }),
-            headers: {
-              "content-type": "application/json",
-            },
-            method: "POST",
-          });
-        }}
-        type="button"
-      >
+      <button type="submit">
         Submit
       </button>
     </form>
