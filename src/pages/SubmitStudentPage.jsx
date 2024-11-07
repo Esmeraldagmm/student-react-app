@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const SubmitStudentPage = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [major, setMajor] = useState('');
-  const [school, setSchool] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [major, setMajor] = useState("");
+  const [school, setSchool] = useState("");
 
   // 1. add onChange handlers to each input to update the state
   // 2. add onSubmit handler to the form to submit the data
@@ -21,11 +21,19 @@ export const SubmitStudentPage = () => {
         placeholder="Last Name"
         onChange={(event) => setLastName(event.target.value)}
       />
-      <input type="text" placeholder="Major" onChange={(event) => setMajor(event.target.value)} />
-      <input type="text" placeholder="School" onChange={(event) => setSchool(event.target.value)} />
+      <input
+        type="text"
+        placeholder="Major"
+        onChange={(event) => setMajor(event.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="School"
+        onChange={(event) => setSchool(event.target.value)}
+      />
       <button
         onClick={async () => {
-          await fetch('http://localhost:3000/students', {
+          await fetch("http://localhost:3000/students", {
             body: JSON.stringify({
               firstName: firstName,
               lastName: lastName,
@@ -33,9 +41,9 @@ export const SubmitStudentPage = () => {
               school: school,
             }),
             headers: {
-              'content-type': 'application/json',
+              "content-type": "application/json",
             },
-            method: 'POST',
+            method: "POST",
           });
         }}
         type="button"
